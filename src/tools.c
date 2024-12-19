@@ -3,124 +3,139 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 22:10:42 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/17 22:10:42 by aviscogl         ###   ########lyon.fr   */
+/*   Created: 2024/12/17 22:10:42 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/12/18 13:32:08 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap(t_stack *stack)
+void	swap(t_stack *stack) // sa, sb
 {
-    if (stack && stack->next)
-    {
-        int temp = stack->value;
-        stack->value = stack->next->value;
-        stack->next->value = temp;
-    }
+	int temp;
+
+	if (stack && stack->next)
+	{
+		temp = stack->data;
+		stack->data = stack->next->data;
+		stack->next->data = temp;
+	}
 }
 
-void swap_both(t_stack *a, t_stack *b)
+void	swap_both(t_stack *a, t_stack *b) // ss
 {
-    swap(a);
-    swap(b);
+	swap(a);
+	swap(b);
 }
 
-void push_to(t_stack **src, t_stack **dest)
+void	push_to(t_stack **src, t_stack **dest) // pa, pb
 {
-    if (*src)
-    {
-        t_stack *temp = *src;
-        *src = (*src)->next;
-        temp->next = *dest;
-        *dest = temp;
-    }
+	t_stack *temp;
+
+	if (*src)
+	{
+		temp = *src;
+		*src = (*src)->next;
+		temp->next = *dest;
+		*dest = temp;
+	}
 }
 
-void rotate(t_stack **stack)
+void	rotate(t_stack **stack) // ra, rb
 {
-    if (*stack && (*stack)->next)
-    {
-        t_stack *temp = *stack;
-        *stack = (*stack)->next;
-        temp->next = NULL;
+	t_stack *temp;
+	t_stack *current;
 
-        t_stack *current = *stack;
-        while (current->next)
-            current = current->next;
-        current->next = temp;
-    }
+	if (*stack && (*stack)->next)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		temp->next = NULL;
+		current = *stack;
+		while (current->next)
+			current = current->next;
+		current->next = temp;
+	}
 }
 
-void rotate_both(t_stack **a, t_stack **b)
+void	rotate_both(t_stack **a, t_stack **b) // rr
 {
-    rotate(a);
-    rotate(b);
+	rotate(a);
+	rotate(b);
 }
 
-void reverse_rotate(t_stack **stack)
+void	reverse_rotate(t_stack **stack) // rra, rrb
 {
-    if (*stack && (*stack)->next)
-    {
-        t_stack *prev = NULL;
-        t_stack *current = *stack;
-        while (current->next)
-        {
-            prev = current;
-            current = current->next;
-        }
-        prev->next = NULL;
-        current->next = *stack;
-        *stack = current;
-    }
+	t_stack *prev;
+	t_stack *current;
+
+	if (*stack && (*stack)->next)
+	{
+		prev = NULL;
+		current = *stack;
+		while (current->next)
+		{
+			prev = current;
+			current = current->next;
+		}
+		prev->next = NULL;
+		current->next = *stack;
+		*stack = current;
+	}
 }
 
-void reverse_rotate_both(t_stack **a, t_stack **b)
+void	reverse_rotate_both(t_stack **a, t_stack **b) // rrr
 {
-    reverse_rotate(a);
-    reverse_rotate(b);
+	reverse_rotate(a);
+	reverse_rotate(b);
 }
 
-t_stack *stack_init(int *values, int size)
+t_stack	*stack_init(int *datas, int size)
 {
-    t_stack *stack = NULL;
-    int i = size - 1;
-    while (i >= 0)
-    {
-        push(&stack, values[i]);
-        i--;
-    }
-    return stack;
+	t_stack	*stack;
+	int		i;
+
+	stack = NULL;
+	i = size - 1;
+	while (i >= 0)
+	{
+		push(&stack, datas[i]);
+		i--;
+	}
+	return (stack);
 }
 
-void push(t_stack **stack, int value)
+void	push(t_stack **stack, int data) // pa, pb
 {
-    t_stack *new_node = malloc(sizeof(t_stack));
-    if (!new_node)
-        return;
-    new_node->value = value;
-    new_node->next = *stack;
-    *stack = new_node;
+	t_stack *new_node;
+
+	new_node = malloc(sizeof(t_stack));
+	if (!new_node)
+		return ;
+	new_node->data = data;
+	new_node->next = *stack;
+	*stack = new_node;
 }
 
-
-void print_stack(t_stack *stack)
+void	print_stack(t_stack *stack)
 {
-    while (stack)
-    {
-        printf("%d\n", stack->value);
-        stack = stack->next;
-    }
+	while (stack)
+	{
+		printf("%d\n", stack->data);
+		stack = stack->next;
+	}
 }
 
-void free_stack(t_stack **stack)
+void	free_stack(t_stack **stack)
 {
-    while (*stack)
-    {
-        t_stack *temp = *stack;
-        *stack = (*stack)->next;
-        free(temp);
-    }
+	t_stack	*temp;
+
+	while (*stack)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
+	}
 }

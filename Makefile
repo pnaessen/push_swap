@@ -1,6 +1,6 @@
 NAME := push_swap
 
-SRC:= $(addprefix $(SRC_DIR), tools.c )
+SRC:= $(addprefix $(SRC_DIR), tools.c, pars.c, init.c)
 OBJ_DIR:= .obj/
 OBJ:= $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEPS:= $(OBJ:%.o=%.d)
@@ -13,16 +13,16 @@ INCLUDES:= include/
 
 HEADERS:= -I $(INCLUDES)
 
-all: $(NAME)
+all: welcome $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CCFLAGS) $(OBJ) -o $(NAME)
-	@echo "👉 ༼☉ɷ⊙༽ $(BLUE)$(CC) $(CCFLAGS) $(OBJ)  $(MLX_FLAG) $(LIBFT_FLAG) -o $(NAME)$(DEF_COLOR)"
-	@echo "$(GREEN)✨✨✨✨✨✨✨✨ ¯\(◉◡◔)/¯ $(NAME) compiled ¯\(◉◡◔)/¯ ✨✨✨✨✨✨✨✨✨✨✨✨✨🐷 $(DEF_COLOR)"
+	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ)  -o $(NAME)$(DEF_COLOR)"
+	@echo "$(GREEN)🧝‍♂️ Un lutin a aidé à compiler $(NAME)! Joyeux Noël ! 🧝‍♂️$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@echo "🍩 $(MAGENTA)Compiling: $< $(DEF_COLOR)"
+	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
 
 -include $(DEPS)
@@ -38,15 +38,44 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
+welcome:
+	@echo "🚀 $(CYAN)Starting compilation of $(NAME)... Hold on to your bits! $(DEF_COLOR)"
+
 clean:
+	@echo "🧹 $(YELLOW)Cleaning object files...$(DEF_COLOR)"
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "$(RED)🧨💥🧨💥🧨🧨🧨🧨🧨🧨🧨🧨🧨 $(NAME) remove 🧨💥🧨💥🧨🧨🧨🧨🧨🧨🧨🧨🧨$(DEF_COLOR)"
+	@echo "$(RED)"
+	@echo "        . . . . . . . . . ."
+	@echo "      .     *     *     *"
+	@echo "   .       *       *       ."
+	@echo "         *   BOOM!   *"
+	@echo "      .       *       *       ."
+	@echo "    *     *     *     *     *"
+	@echo "      ' . . . . . . . . '"
+	@echo "$(DEF_COLOR)"
+	@echo "$(RED)🧨🧨🧨🧨🧨💥 $(NAME) remove 💥🧨🧨🧨🧨🧨 $(DEF_COLOR)"
 	rm -f $(NAME)
 
 re: fclean all
 
+
+# explosion:
+#	@echo "$(RED)💥 Animation d'explosion...$(DEF_COLOR)"
+#	@bash -c ' \
+	for i in {1..5}; do \
+		clear; \
+		echo "        *        "; \
+		echo "       ***       "; \
+		echo "      *****      "; \
+		echo "     *******     "; \
+		echo "    *********    "; \
+		sleep 0.5; \
+	done; \
+	clear; \
+	echo "(Il n\'y a rien ici)"; \
+	'
 info:
 	@echo "OBJ": $(OBJ)
 	@echo "DEPS": $(DEPS)
