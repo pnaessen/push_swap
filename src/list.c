@@ -23,6 +23,25 @@ t_stack	*new_node(int value)
 	new_node->next = NULL;
 	return (new_node);
 }
+
+void add_back(t_stack **head, int value)
+{
+    t_stack *node;
+
+    node = new_node(value);
+    if (!new_node)
+        return ;
+    if (!*head)
+    {
+        *head = new_node;
+        return ;
+    }
+    t_stack *temp;
+    *temp = *head;
+    while (temp->next)
+        temp = temp->next;
+    temp->next = new_node;
+}
 int	atoi(char *str)
 {
 	int i;
@@ -59,7 +78,7 @@ char *strjoin(int argc, char **argv)
     while (i < argc)
     {
         j = 0;
-        while (argv[i][j])
+        while (argv[i][j]) // faux car possible d'avoir "56 76 76" recu 1 argc alors que je dois detec 3
             j++;
         i++;
     }
