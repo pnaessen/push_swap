@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:10:42 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/18 13:32:08 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/20 15:42:19 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,33 +90,6 @@ void	reverse_rotate_both(t_stack **a, t_stack **b) // rrr
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
-}
-
-t_stack	*stack_init(int *datas, int size)
-{
-	t_stack	*stack;
-	int		i;
-
-	stack = NULL;
-	i = size - 1;
-	while (i >= 0)
-	{
-		push(&stack, datas[i]);
-		i--;
-	}
-	return (stack);
-}
-
-void	push(t_stack **stack, int data) // pa, pb
-{
-	t_stack *new_node;
-
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		return ;
-	new_node->data = data;
-	new_node->next = *stack;
-	*stack = new_node;
 }
 
 void	print_stack(t_stack *stack)

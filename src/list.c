@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:03:51 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/19 17:37:09 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/20 15:58:11 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,115 +24,21 @@ t_stack	*new_node(int value)
 	return (new_node);
 }
 
-void add_back(t_stack **head, int value)
+void	add_back(t_stack **head, int value)
 {
-    t_stack *node;
+	t_stack	*node;
+	t_stack	*temp;
 
-    node = new_node(value);
-    if (!new_node)
-        return ;
-    if (!*head)
-    {
-        *head = new_node;
-        return ;
-    }
-    t_stack *temp;
-    *temp = *head;
-    while (temp->next)
-        temp = temp->next;
-    temp->next = new_node;
-}
-int	atoi(char *str)
-{
-	int i;
-	int sign;
-	int nb;
-
-	i = 0;
-	nb = 0;
-	sign = 1;
-
-	if (str[i] == '-' || str[i] == '+')
+	node = new_node(value);
+	if (!&new_node)
+		return ;
+	if (!*head)
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		*head = node;
+		return ;
 	}
-    while(str[i] >= '0' && str[i] <= 9)
-    {
-        nb = nb * 10 +(str[i] - '0');
-        i++;
-    }
-    return (nb *sign);
+	temp = *head;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = node;
 }
-char *strjoin(int argc, char **argv)
-{
-    int i;
-    int j;
-    int k;
-    char *str;
-
-    i = 1;
-    j = 0;
-    k = 0;
-    while (i < argc)
-    {
-        j = 0;
-        while (argv[i][j]) // faux car possible d'avoir "56 76 76" recu 1 argc alors que je dois detec 3
-            j++;
-        i++;
-    }
-    str = malloc(sizeof(char) * (j + 1));
-    if (!str)
-        return (NULL);
-    i = 1;
-    while (i < argc)
-    {
-        j = 0;
-        while (argv[i][j])
-        {
-            str[k] = argv[i][j];
-            j++;
-            k++;
-        }
-        i++;
-    }
-    str[k] = '\0';
-    return (str);
-}
-
-// int *get_datas(int argc, char **argv)
-// {
-//     int i;
-//     int j;
-//     int *datas;
-//     char *str;
-
-//     i = 1;
-//     j = 0;
-//     str = strjoin(argc, argv);
-//     if (!str)
-//         return (NULL);
-//     while (str[j])
-//     {
-//         if (str[j] == ' ')
-//             i++;
-//         j++;
-//     }
-//     datas = malloc(sizeof(int) * i);
-//     if (!datas)
-//         return (NULL);
-//     i = 0;
-//     j = 0;
-//     while (str[j])
-//     {
-//         if (str[j] == ' ')
-//             j++;
-//         datas[i] = atoi(&str[j]);
-//         i++;
-//         while (str[j] && str[j] != ' ')
-//             j++;
-//     }
-//     free(str);
-//     return (datas);
-// }

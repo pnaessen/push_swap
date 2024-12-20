@@ -1,6 +1,6 @@
 NAME := push_swap
 
-SRC:= $(addprefix $(SRC_DIR), tools.c, pars.c, init.c)
+SRC:= $(addprefix $(SRC_DIR), init.c tools.c pars.c list.c)
 OBJ_DIR:= .obj/
 OBJ:= $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEPS:= $(OBJ:%.o=%.d)
