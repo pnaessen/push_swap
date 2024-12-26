@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:10:42 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/20 15:42:19 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/27 00:25:14 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack) // sa, sb
+void swap(t_stack *stack) // sa, sb
 {
 	int temp;
 
@@ -24,13 +24,13 @@ void	swap(t_stack *stack) // sa, sb
 	}
 }
 
-void	swap_both(t_stack *a, t_stack *b) // ss
+void swap_both(t_stack *a, t_stack *b) // ss
 {
 	swap(a);
 	swap(b);
 }
 
-void	push_to(t_stack **src, t_stack **dest) // pa, pb
+void push_to(t_stack **src, t_stack **dest) // pa, pb
 {
 	t_stack *temp;
 
@@ -43,7 +43,7 @@ void	push_to(t_stack **src, t_stack **dest) // pa, pb
 	}
 }
 
-void	rotate(t_stack **stack) // ra, rb
+void rotate(t_stack **stack) // ra, rb
 {
 	t_stack *temp;
 	t_stack *current;
@@ -60,13 +60,13 @@ void	rotate(t_stack **stack) // ra, rb
 	}
 }
 
-void	rotate_both(t_stack **a, t_stack **b) // rr
+void rotate_both(t_stack **a, t_stack **b) // rr
 {
 	rotate(a);
 	rotate(b);
 }
 
-void	reverse_rotate(t_stack **stack) // rra, rrb
+void reverse_rotate(t_stack **stack) // rra, rrb
 {
 	t_stack *prev;
 	t_stack *current;
@@ -86,13 +86,13 @@ void	reverse_rotate(t_stack **stack) // rra, rrb
 	}
 }
 
-void	reverse_rotate_both(t_stack **a, t_stack **b) // rrr
+void reverse_rotate_both(t_stack **a, t_stack **b) // rrr
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
 }
 
-void	print_stack(t_stack *stack)
+void print_stack(t_stack *stack) // debug
 {
 	while (stack)
 	{
@@ -101,9 +101,9 @@ void	print_stack(t_stack *stack)
 	}
 }
 
-void	free_stack(t_stack **stack)
+void free_stack(t_stack **stack)
 {
-	t_stack	*temp;
+	t_stack *temp;
 
 	while (*stack)
 	{
