@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/27 00:27:20 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/27 21:53:58 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int argc, char **argv)
     char **split_args_result;
     int count;
     t_stack *stack_a = NULL;
+    t_stack *stack_b = NULL;
 
     joined_args = strjoin(argc, argv);
     if (!joined_args)
@@ -29,13 +30,13 @@ int main(int argc, char **argv)
     if (!split_args_result)
         return (1);
     if (process_args(split_args_result, count, &stack_a) != 0)
-    {
-        free_split_args(split_args_result, count);
-        return (1);
-    }
+        return (free_split_args(split_args_result, count), 1);
+    // radix_sort(&stack_a, &stack_b, count);
+    chunk_sort(&stack_a, &stack_b, count);
     free_split_args(split_args_result, count);
     print_stack(stack_a);
     free_stack(&stack_a);
+    free_stack(&stack_b);
     return (0);
 }
 
@@ -47,7 +48,7 @@ int process_args(char **split_args, int count, t_stack **stack)
     i = 0;
     while (i < count)
     {
-        value = ft_atoi(split_args[i]);
+        value = ft_atoi(split_args[i], stack, split_args, count);
         if (is_duplicate(*stack, value))
         {
             write(1, "Error\n", 6);
@@ -83,4 +84,20 @@ void free_split_args(char **split_args, int count)
         i++;
     }
     free(split_args);
+}
+
+int max_nbr(t_stack *head)
+{
+    int max;
+
+    if (!head)
+        return (-1);
+    max = head->data;
+    while (head)
+    {
+        if (head->data > max)
+            max = head->data;
+        head = head->next;
+    }
+    return (max);
 }

@@ -6,13 +6,13 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:49:40 by pn                #+#    #+#             */
-/*   Updated: 2024/12/26 19:41:12 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/27 00:42:31 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_atoi(char *str)
+int ft_atoi(char *str, t_stack **stack, char **split_args, int count)
 {
     int i;
     int sign;
@@ -35,6 +35,8 @@ int ft_atoi(char *str)
     if (nb * sign > INT_MAX || nb * sign < INT_MIN)
     {
         write(1, "Error\n", 6);
+        free_split_args(split_args, count);
+        free_stack(stack);
         exit(EXIT_FAILURE);
     }
     return ((int)(nb * sign));

@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/27 00:25:29 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/27 22:17:33 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,21 @@ char **split_args(const char *str, int *count);
 int is_valid_number(const char *str); // a deplace
 
 ///////tools_pars.c////
-int ft_atoi(char *str);
+int ft_atoi(char *str, t_stack **stack, char **split_args, int count);
 char *ft_strlcpy(char *dst, const char *src, size_t size);
 int calculate_length(int argc, char **argv);
 const char *skip_whitespace(const char *str);
 void *free_all(char **res, int count);
 
+//////////algo.c//////////
+void radix_sort(t_stack **a, t_stack **b, int size);
+void chunk_sort(t_stack **a, t_stack **b, int size);
+void move_largest_to_top(t_stack **stack, int largest);
+int min_nbr(t_stack *head);
+
 int process_args(char **split_args, int count, t_stack **stack);
 int is_duplicate(t_stack *head, int value);
 void free_split_args(char **split_args, int count);
+int max_nbr(t_stack *head);
 
 #endif
