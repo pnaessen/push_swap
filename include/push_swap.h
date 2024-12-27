@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/27 22:17:33 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/28 00:46:07 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void *free_all(char **res, int count);
 //////////algo.c//////////
 void radix_sort(t_stack **a, t_stack **b, int size);
 void chunk_sort(t_stack **a, t_stack **b, int size);
-void move_largest_to_top(t_stack **stack, int largest);
+void move_max_to_top(t_stack **stack, int max);
 int min_nbr(t_stack *head);
+void move_all_b_to_a(t_stack **a, t_stack **b);
+void push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val, int *count);
 
 int process_args(char **split_args, int count, t_stack **stack);
 int is_duplicate(t_stack *head, int value);

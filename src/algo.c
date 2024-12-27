@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2024/12/27 22:18:17 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/28 00:47:23 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,47 +41,6 @@ void radix_sort(t_stack **a, t_stack **b, int size) // trie par bytes
     }
 }
 
-void chunk_sort(t_stack **a, t_stack **b, int size) // trie par chunks
-{
-    int chunk_size;
-    int min_stack;
-    int max_stack;
-    int i;
-    int min_val, max_val;
-
-    min_stack = min_nbr(*a);
-    max_stack = max_nbr(*a);
-    chunk_size = (max_stack - min_stack) / 5 + 1;
-    i = 0;
-    while (i < 5)
-    {
-        min_val = min_stack + i * chunk_size;
-        max_val = min_stack + (i + 1) * chunk_size;
-        // printf("Chunk %d: [%d, %d)\n", i, min_val, max_val);
-        int count = size;
-        while (count > 0)
-        {
-            if ((*a)->data >= min_val && (*a)->data < max_val)
-            {
-                push_to(a, b);
-                // printf("pb\n");
-                //  print_stack(*a);
-                // print_stack(*b);
-            }
-            else
-                rotate(a);
-            count--;
-        }
-        i++;
-    }
-    while (*b)
-    {
-        int max = max_nbr(*b);
-        move_largest_to_top(b, max);
-        push_to(b, a);
-    }
-}
-
 int min_nbr(t_stack *head)
 {
     int min;
@@ -95,9 +54,53 @@ int min_nbr(t_stack *head)
     }
     return (min);
 }
-
-void move_largest_to_top(t_stack **stack, int largest)
+void push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val, int *count)
 {
-    while ((*stack)->data != largest)
+    while (*count > 0 && *a)
+    {
+        if ((*a)->data >= min_val && (*a)->data < max_val)
+            push_to(a, b);
+        else
+            rotate(a);
+        (*count)--;
+    }
+}
+void move_all_b_to_a(t_stack **a, t_stack **b)
+{
+    while (*b)
+    {
+        int max = max_nbr(*b);
+        move_max_to_top(b, max);
+        if (*b)
+            push_to(b, a);
+    }
+}
+void chunk_sort(t_stack **a, t_stack **b, int size)
+{
+    int chunk_size;
+    int min_stack;
+    int max_stack;
+    int min_val;
+    int max_val;
+    int i;
+
+    min_stack = min_nbr(*a);
+    max_stack = max_nbr(*a);
+    chunk_size = (max_stack - min_stack) / 5 + 1;
+    i = 0;
+    while (i < 5)
+    {
+        min_val = min_stack + i * chunk_size;
+        max_val = min_stack + (i + 1) * chunk_size;
+        int count = size;
+        push_chunk_to_b(a, b, min_val, max_val, &count);
+        i++;
+    }
+    move_all_b_to_a(a, b);
+}
+
+void move_max_to_top(t_stack **stack, int max)
+{
+    while ((*stack)->data != max)
         rotate(stack);
 }
