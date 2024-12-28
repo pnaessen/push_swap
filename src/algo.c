@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2024/12/28 00:47:23 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/29 00:18:32 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,32 @@ void move_max_to_top(t_stack **stack, int max)
 {
     while ((*stack)->data != max)
         rotate(stack);
+}
+void bubble_sort(t_stack **a, int size)
+{
+    int swapped;
+    int i;
+    int j;
+
+    i = 0;
+    while (i < size - 1)
+    {
+        swapped = 0;
+        j = 0;
+        while (j < size - i - 1)
+        {
+            if ((*a)->data > (*a)->next->data)
+            {
+                swap(*a);
+                swapped = 1;
+            }
+            rotate(a);
+            j++;
+        }
+        while (j-- > 0)
+            reverse_rotate(a);
+        if (!swapped)
+            break;
+        i++;
+    }
 }

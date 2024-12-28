@@ -6,7 +6,7 @@
 /*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/28 00:02:14 by pn               ###   ########lyon.fr   */
+/*   Updated: 2024/12/29 00:21:18 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int main(int argc, char **argv)
     if (process_args(split_args_result, count, &stack_a) != 0)
         return (free_split_args(split_args_result, count), 1);
     free_split_args(split_args_result, count);
-    // radix_sort(&stack_a, &stack_b, count);
-    chunk_sort(&stack_a, &stack_b, count);
+    choice_algo(&stack_a, &stack_b, count);
     print_stack(stack_a);
     free_stack(&stack_a);
     free_stack(&stack_b);
@@ -100,4 +99,14 @@ int max_nbr(t_stack *head)
         head = head->next;
     }
     return (max);
+}
+
+void choice_algo(t_stack **a, t_stack **b, int size)
+{
+    if (size <= 10)
+        bubble_sort(a, size);
+    else if (size <= 100)
+        chunk_sort(a, b, size);
+    else
+        radix_sort(a, b, size);
 }
