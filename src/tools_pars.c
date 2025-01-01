@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:49:40 by pn                #+#    #+#             */
-/*   Updated: 2024/12/31 14:48:41 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:44:08 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	calculate_length(int argc, char **argv)
 	}
 	return (len + argc - 2);
 }
+
 const char	*skip_whitespace(const char *str)
 {
 	while (*str == ' ' || *str == '\t')

@@ -6,25 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:14:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/31 17:27:39 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:43:08 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_valid_number(const char *str)
-{
-	while (*str)
-	{
-		if (!(*str >= '0' && *str <= '9') && *str != ' ' && *str != '-')
-		{
-			write(1, "Error\n", 6);
-			return (0);
-		}
-		str++;
-	}
-	return (1);
-}
 
 int	count_words(const char *str)
 {
@@ -75,6 +61,7 @@ char	*strjoin(int argc, char **argv)
 	str[k] = '\0';
 	return (str);
 }
+
 char	*allocate_word(const char *start, const char *end)
 {
 	char	*word;

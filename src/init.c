@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/31 17:27:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:10:14 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	main(int argc, char **argv)
 	if (process_args(split_args_result, count, &stack_a) != 0)
 		return (free_split_args(split_args_result, count), 1);
 	free_split_args(split_args_result, count);
-	//choice_algo(&stack_a, &stack_b, count);
-	//print_stack(stack_a);
-	radix_sort(&stack_a, &stack_b, count);
+	choice_algo(&stack_a, &stack_b, count);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
@@ -75,25 +73,16 @@ int	is_duplicate(t_stack *head, int value)
 	return (0);
 }
 
-void	free_split_args(char **split_args, int count)
-{
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		free(split_args[i]);
-		i++;
-	}
-	free(split_args);
-}
-
 void	choice_algo(t_stack **a, t_stack **b, int size)
 {
-	if (size <= 10)
-		bubble_sort(a, size);
+	if (is_sorted(*a))
+		return ;
+	if (size == 3)
+		sort_three(a);
+	else if (size <= 60)
+		insertion_sort(a, b);
 	else if (size <= 100)
-		chunk_sort(a, b, size);
+		improved_sort(a, b, size);
 	else
-		radix_sort(a, b, size);
+		radix_sort(a, b, size); //de 101 a 397
 }

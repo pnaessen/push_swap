@@ -6,20 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:25:44 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/31 17:27:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:42:02 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	move_max_to_top(t_stack **stack, int max)
-{
-	while ((*stack)->data != max)
-	{
-		rotate(stack);
-		write(1, "rb\n", 3);
-	}
-}
 
 int	min_nbr(t_stack *head)
 {
@@ -33,22 +24,6 @@ int	min_nbr(t_stack *head)
 		head = head->next;
 	}
 	return (min);
-}
-
-void	move_all_b_to_a(t_stack **a, t_stack **b)
-{
-	int	max;
-
-	while (*b)
-	{
-		max = max_nbr(*b);
-		move_max_to_top(b, max);
-		if (*b)
-		{
-			push_to(b, a);
-			write(1, "pa\n", 3);
-		}
-	}
 }
 
 int	max_nbr(t_stack *head)
@@ -65,4 +40,37 @@ int	max_nbr(t_stack *head)
 		head = head->next;
 	}
 	return (max);
+}
+
+void	smallest_to_top(t_stack **a, int size)
+{
+	int	min;
+	int	position;
+	int	mid;
+
+	min = min_nbr(*a);
+	position = get_position(*a, min);
+	mid = size / 2;
+	while ((*a)->data != min)
+	{
+		if (position <= mid)
+		{
+			rotate(a);
+			write(1, "ra\n", 3);
+		}
+		else
+		{
+			reverse_rotate(a);
+			write(1, "rra\n", 4);
+		}
+	}
+}
+
+void	push_all_back(t_stack **b, t_stack **a)
+{
+	while (*b)
+	{
+		push_to(b, a);
+		write(1, "pa\n", 3);
+	}
 }

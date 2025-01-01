@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2024/12/31 17:27:55 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:46:28 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,88 +41,91 @@ void	radix_sort(t_stack **a, t_stack **b, int size) // trie par bytes
 			}
 			count--;
 		}
-		while (*b)
-		{
-			push_to(b, a);
-			write(1, "pa\n", 3);
-		}
+		push_all_back(b, a);
 		i++;
 	}
 }
 
-void	push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val,
-		int *count)
+void	insertion_sort(t_stack **a, t_stack **b)
 {
-	while (*count > 0 && *a)
+	int	size;
+
+	size = stack_size(*a);
+	while (size > 1 && (!is_sorted(*a) || *b))
 	{
-		if ((*a)->data >= min_val && (*a)->data < max_val)
-		{
-			push_to(a, b);
-			write(1, "pb\n", 3);
-		}
-		else
-		{
-			rotate(a);
-			write(1, "ra\n", 3);
-		}
-		(*count)--;
+		if (is_sorted(*a) && !(*b))
+			return ;
+		smallest_to_top(a, size);
+		push_to(a, b);
+		write(1, "pb\n", 3);
+		size--;
+	}
+	push_all_back(b, a);
+}
+
+void	sort_three(t_stack **a)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*a)->data;
+	second = (*a)->next->data;
+	third = (*a)->next->next->data;
+	if (first > second && second < third && first < third)
+	{
+		swap(*a);
+		write(1, "sa\n", 3);
+	}
+	else if (first > second && second > third)
+	{
+		swap(*a);
+		write(1, "sa\n", 3);
+		reverse_rotate(a);
+		write(1, "rra\n", 4);
+	}
+	else if (first > second && second < third && first > third)
+	{
+		rotate(a);
+		write(1, "ra\n", 3);
+	}
+	else if (first < second && second > third && first < third)
+	{
+		swap(*a);
+		write(1, "sa\n", 3);
+		rotate(a);
+		write(1, "ra\n", 3);
+	}
+	else if (first < second && second > third && first > third)
+	{
+		reverse_rotate(a);
+		write(1, "rra\n", 4);
 	}
 }
 
-void	chunk_sort(t_stack **a, t_stack **b, int size)
+void	improved_sort(t_stack **a, t_stack **b, int size)
 {
 	int	chunk_size;
-	int	min_stack;
-	int	max_stack;
-	int	min_val;
-	int	max_val;
-	int	i;
-	int	count;
+	int	min;
+	int	max;
+	int	pushed;
 
-	min_stack = min_nbr(*a);
-	max_stack = max_nbr(*a);
-	chunk_size = (max_stack - min_stack) / 5 + 1;
-	i = 0;
-	while (i < 5)
+	chunk_size = size / 5;
+	min = 0;
+	max = chunk_size;
+	pushed = 0;
+	index_stack(a);
+	while (*a)
 	{
-		min_val = min_stack + i * chunk_size;
-		max_val = min_stack + (i + 1) * chunk_size;
-		count = size;
-		push_chunk_to_b(a, b, min_val, max_val, &count);
-		i++;
-	}
-	move_all_b_to_a(a, b);
-}
-
-void	bubble_sort(t_stack **a, int size)
-{
-	int	swapped;
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		swapped = 0;
-		j = 0;
-		while (j < size - i - 1)
+		pushed = process_push(a, b, min, max, pushed);
+		if (pushed == max - min || stack_size(*a) == 0)
 		{
-			if ((*a)->data > (*a)->next->data)
-			{
-				swap(*a);
-				swapped = 1;
-			}
-			rotate(a);
-			write(1, "ra\n", 3);
-			j++;
+			min = max;
+			max += chunk_size;
+			if (max > size)
+				max = size;
+			pushed = 0;
 		}
-		while (j-- > 0)
-		{
-			reverse_rotate(a);
-			write(1, "rra\n", 4);
-		}
-		if (!swapped)
-			break ;
-		i++;
 	}
+	push_back_to_a(a, b, size);
 }

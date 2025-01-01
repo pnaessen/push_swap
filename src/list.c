@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:03:51 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/31 16:35:56 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/01 16:42:48 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,45 @@ void	add_back(t_stack **head, int value)
 	temp->next = node;
 }
 
+int	is_sorted(t_stack *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	stack_size(t_stack *stack)
+{
+	int		size;
+	t_stack	*temp;
+
+	size = 0;
+	temp = stack;
+	while (temp)
+	{
+		size++;
+		temp = temp->next;
+	}
+	return (size);
+}
+
+int	get_position(t_stack *stack, int value)
+{
+	int		position;
+	t_stack	*current;
+
+	position = 0;
+	current = stack;
+	while (current)
+	{
+		if (current->data == value)
+			return (position);
+		current = current->next;
+		position++;
+	}
+	return (-1);
+}
