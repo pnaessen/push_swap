@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:25:44 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/01 16:42:02 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/02 16:47:35 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	smallest_to_top(t_stack **a, int size)
 	min = min_nbr(*a);
 	position = get_position(*a, min);
 	mid = size / 2;
+	if (position == 0)
+		return ;
 	while ((*a)->data != min)
 	{
 		if (position <= mid)

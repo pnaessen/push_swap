@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/01 16:47:50 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/03 11:35:26 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,14 @@ int					find_position(t_stack *stack, int target);
 void				index_stack(t_stack **stack);
 int					process_push(t_stack **a, t_stack **b, int min, int max,
 						int pushed);
+
+int					get_pos(t_stack *stack, int value);
+int					get_max_value(t_stack *stack);
+int					get_min_value(t_stack *stack);
+void				move_max_to_top(t_stack **b, int max);
+int					has_elements_in_range(t_stack *stack, int min_val,
+						int max_val);
+void				mechanical_turk_sort(t_stack **a, t_stack **b, int size);
+void	last_sort(t_stack **a);
 
 #endif
