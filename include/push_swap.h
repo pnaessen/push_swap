@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/03 11:35:26 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/04 12:52:46 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	push_to(t_stack **src, t_stack **dest); // pa, pb
 void	rotate(t_stack **stack);                // ra, rb
 void	rotate_both(t_stack **a, t_stack **b);  // rr
 
+///////tools2.c////
+int					is_valid_number(const char *str);
+void	reverse_rotate(t_stack **stack);               // rra, rrb
+void	reverse_rotate_both(t_stack **a, t_stack **b); // rrr
+void				free_stack(t_stack **stack);
+void				free_split_args(char **split_args, int count);
+
 ///////list.c////
 t_stack				*new_node(int value);
 void				add_back(t_stack **head, int value);
@@ -45,13 +52,6 @@ const char			*skip_word(const char *str);
 char				*strjoin(int argc, char **argv);
 char				*allocate_word(const char *start, const char *end);
 char				**split_args(const char *str, int *count);
-
-///////tools2.c////
-int					is_valid_number(const char *str);
-void	reverse_rotate(t_stack **stack);               // rra, rrb
-void	reverse_rotate_both(t_stack **a, t_stack **b); // rrr
-void				free_stack(t_stack **stack);
-void				free_split_args(char **split_args, int count);
 
 ///////tools_pars.c////
 int					ft_atoi(char *str, t_stack **stack, char **split_args,
@@ -72,6 +72,7 @@ int					max_nbr(t_stack *head);
 int					min_nbr(t_stack *head);
 void				smallest_to_top(t_stack **a, int size);
 void				push_all_back(t_stack **b, t_stack **a);
+void				handle_three(t_stack **a, int first, int second, int third);
 
 //////////init.c//////////
 int					process_args(char **split_args, int count, t_stack **stack);
@@ -79,21 +80,20 @@ int					is_duplicate(t_stack *head, int value);
 void				choice_algo(t_stack **a, t_stack **b, int size);
 
 /////////improved_tools.c////////
-
-int					find_closest_in_range(t_stack **a, int min, int max);
+int					find_closest(t_stack **a, int min, int max);
 void				push_back_to_a(t_stack **a, t_stack **b, int size);
-int					find_position(t_stack *stack, int target);
+int					find_position(t_stack *stack, int value);
 void				index_stack(t_stack **stack);
 int					process_push(t_stack **a, t_stack **b, int min, int max,
 						int pushed);
 
-int					get_pos(t_stack *stack, int value);
-int					get_max_value(t_stack *stack);
-int					get_min_value(t_stack *stack);
+/////////utils.c////////
+void				process_radix_bit(t_stack **a, t_stack **b, int size,
+						int bit);
+
 void				move_max_to_top(t_stack **b, int max);
-int					has_elements_in_range(t_stack *stack, int min_val,
-						int max_val);
 void				mechanical_turk_sort(t_stack **a, t_stack **b, int size);
-void	last_sort(t_stack **a);
+int					elem_in_chunk(t_stack **a, int min_val, int max_val);
+
 
 #endif

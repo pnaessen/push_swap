@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 16:45:58 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/03 10:57:58 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/04 11:03:56 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	process_push(t_stack **a, t_stack **b, int min, int max, int pushed)
 		write(1, "pb\n", 3);
 		return (pushed + 1);
 	}
-	closest = find_closest_in_range(a, min, max);
+	closest = find_closest(a, min, max);
 	if (closest <= stack_size(*a) / 2)
 	{
 		rotate(a);
@@ -38,13 +38,13 @@ int	process_push(t_stack **a, t_stack **b, int min, int max, int pushed)
 
 void	push_back_to_a(t_stack **a, t_stack **b, int size)
 {
-	int	target;
+	int	value;
 	int	pos;
 
 	while (*b)
 	{
-		target = size - 1;
-		pos = find_position(*b, target);
+		value = size - 1;
+		pos = find_position(*b, value);
 		if (pos == 0)
 		{
 			push_to(b, a);
@@ -64,7 +64,7 @@ void	push_back_to_a(t_stack **a, t_stack **b, int size)
 	}
 }
 
-int	find_closest_in_range(t_stack **a, int min, int max)
+int	find_closest(t_stack **a, int min, int max)
 {
 	int		i;
 	t_stack	*tmp;
@@ -81,12 +81,12 @@ int	find_closest_in_range(t_stack **a, int min, int max)
 	return (0);
 }
 
-int	find_position(t_stack *stack, int target)
+int	find_position(t_stack *stack, int value)
 {
 	int	pos;
 
 	pos = 0;
-	while (stack && stack->index != target)
+	while (stack && stack->index != value)
 	{
 		pos++;
 		stack = stack->next;
@@ -95,7 +95,6 @@ int	find_position(t_stack *stack, int target)
 }
 
 void	index_stack(t_stack **stack)
-// compare pour combien d'élém sont plus petits que l'élém actuel
 {
 	t_stack *current;
 	t_stack *compare;

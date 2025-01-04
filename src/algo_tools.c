@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:25:44 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/02 16:47:35 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/04 09:22:13 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,23 @@ void	push_all_back(t_stack **b, t_stack **a)
 	{
 		push_to(b, a);
 		write(1, "pa\n", 3);
+	}
+}
+
+void	handle_three(t_stack **a, int first, int second, int third)
+{
+	if (first > second && second > third)
+	{
+		swap(*a);
+		write(1, "sa\n", 3);
+		reverse_rotate(a);
+		write(1, "rra\n", 4);
+	}
+	else if (first < second && second > third && first < third)
+	{
+		swap(*a);
+		write(1, "sa\n", 3);
+		rotate(a);
+		write(1, "ra\n", 3);
 	}
 }

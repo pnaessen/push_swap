@@ -6,43 +6,30 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2025/01/03 10:57:50 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/04 14:28:43 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	radix_sort(t_stack **a, t_stack **b, int size) // trie par bytes
+void	radix_sort(t_stack **a, t_stack **b, int size)
 {
-	int max_num;
-	int max_bits;
-	int i;
-	int count;
+	int	max_num;
+	int	max_bits;
+	int	bit;
 
 	max_num = max_nbr(*a);
 	max_bits = 0;
-	i = 0;
 	while ((max_num >> max_bits) != 0)
 		max_bits++;
-	while (i < max_bits)
+	bit = 0;
+	while (bit < max_bits)
 	{
-		count = size;
-		while (count > 0)
-		{
-			if ((((*a)->data >> i) & 1) == 1)
-			{
-				rotate(a);
-				write(1, "ra\n", 3);
-			}
-			else
-			{
-				push_to(a, b);
-				write(1, "pb\n", 3);
-			}
-			count--;
-		}
+		process_radix_bit(a, b, size, bit);
 		push_all_back(b, a);
-		i++;
+		bit++;
+		if (is_sorted(*a))
+			return ;
 	}
 }
 
@@ -88,22 +75,8 @@ void	sort_three(t_stack **a)
 		swap(*a);
 		write(1, "sa\n", 3);
 	}
-	else if (first > second && second > third)
-	{
-		swap(*a);
-		write(1, "sa\n", 3);
-		reverse_rotate(a);
-		write(1, "rra\n", 4);
-	}
 	else if (first > second && second < third && first > third)
 	{
-		rotate(a);
-		write(1, "ra\n", 3);
-	}
-	else if (first < second && second > third && first < third)
-	{
-		swap(*a);
-		write(1, "sa\n", 3);
 		rotate(a);
 		write(1, "ra\n", 3);
 	}
@@ -112,6 +85,8 @@ void	sort_three(t_stack **a)
 		reverse_rotate(a);
 		write(1, "rra\n", 4);
 	}
+	else
+		handle_three(a, first, second, third);
 }
 
 void	improved_sort(t_stack **a, t_stack **b, int size)

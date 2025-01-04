@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/03 11:31:00 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/04 14:26:53 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	choice_algo(t_stack **a, t_stack **b, int size)
 		insertion_sort(a, b);
 	else if (size <= 100)
 		improved_sort(a, b, size);
+	else if (size <= 397)
+		radix_sort(a, b, size);
 	else
 		mechanical_turk_sort(a, b, size); //de 101 a 397
 }
