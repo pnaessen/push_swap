@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 14:26:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:33:38 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	main(int argc, char **argv)
 	if (process_args(split_args_result, count, &stack_a) != 0)
 		return (free_split_args(split_args_result, count), 1);
 	free_split_args(split_args_result, count);
-	choice_algo(&stack_a, &stack_b, count);
+	//choice_algo(&stack_a, &stack_b, count);
+	mechanical_turk_sort(&stack_a, &stack_b, count);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:49:40 by pn                #+#    #+#             */
-/*   Updated: 2025/01/01 16:44:08 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:38:37 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ int	ft_atoi(char *str, t_stack **stack, char **split_args, int count)
 			sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
+	while (str[i] >= '0' && str[i++] <= '9')
+		nb = nb * 10 + (str[i - 1] - '0');
 	if (nb * sign > INT_MAX || nb * sign < INT_MIN)
 	{
 		write(1, "Error\n", 6);

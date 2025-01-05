@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:25:44 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 09:22:13 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:31:13 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,41 @@
 
 int	min_nbr(t_stack *head)
 {
-	int	min;
+	t_stack	*temp;
+	int		min;
 
-	min = head->data;
-	while (head)
+	if (!head)
+		return (0);
+	temp = head;
+	min = temp->data;
+	while (temp)
 	{
-		if (head->data < min)
-			min = head->data;
-		head = head->next;
+		if (temp->data < min)
+			min = temp->data;
+		temp = temp->next;
 	}
 	return (min);
 }
 
+
 int	max_nbr(t_stack *head)
 {
-	int	max;
+	t_stack	*temp;
+	int		max;
 
 	if (!head)
 		return (-1);
-	max = head->data;
-	while (head)
+	temp = head;
+	max = temp->data;
+	while (temp)
 	{
-		if (head->data > max)
-			max = head->data;
-		head = head->next;
+		if (temp->data > max)
+			max = temp->data;
+		temp = temp->next;
 	}
 	return (max);
 }
+
 
 void	smallest_to_top(t_stack **a, int size)
 {

@@ -3,92 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:10:03 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 14:21:37 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:34:18 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	mechanical_turk_sort(t_stack **a, t_stack **b, int size)
+void    push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val, int median)
 {
-	int	chunk_size;
-	int	max;
-	int	min_val;
-	int	max_val;
-
-	chunk_size = size / 10;
-	while (*a)
-	{
-		min_val = min_nbr(*a);
-		max_val = min_val + chunk_size;
-		while (elem_in_chunk(a, min_val, max_val))
-		{
-			if ((*a)->data >= min_val && (*a)->data <= max_val)
-			{
-				push_to(a, b);
-				write(1, "pb\n", 3);
-				if ((*b)->data < (min_val + max_val) / 2)
-				{
-					rotate(b);
-					 write(1, "rb\n", 3);
-				}
-			}
-			else
-			{
-				 write(1, "ra\n", 3);
-				rotate(a);
-			}
-		}
-	}
-	while (*b)
-	{
-		max = max_nbr(*b);
-		move_max_to_top(b, max);
-		push_to(b, a);
-		 write(1, "pa\n", 3);
-	}
+    while (elem_in_chunk(a, min_val, max_val))
+    {
+        if ((*a)->data >= min_val && (*a)->data < max_val)
+        {
+            push_to(a, b);
+            write(1, "pb\n", 3);
+            if ((*b)->data < median && (*b)->next)
+            {
+                rotate(b);
+                write(1, "rb\n", 3);
+            }
+        }
+        else
+        {
+            if ((*a)->next && (*b) && (*b)->next && (*a)->data < median && (*b)->data < median)
+            {
+                rotate_both(a, b);
+                write(1, "rr\n", 3);
+            }
+            else
+            {
+                rotate(a);
+                write(1, "ra\n", 3);
+            }
+        }
+    }
 }
 
-void	move_max_to_top(t_stack **b, int max)
+void execute_rotation(t_stack **a, t_stack **b, int pos, int max)
 {
-	int	position;
-	int	size;
+    int size ;
 
-	position = get_position(*b, max);
 	size = stack_size(*b);
-	if (position <= size / 2)
-	{
-		while ((*b)->data != max)
-		{
-			rotate(b);
-			 write(1, "rb\n", 3);
-		}
-	}
-	else
-	{
-		while ((*b)->data != max)
-		{
-			reverse_rotate(b);
-			 write(1, "rrb\n", 4);
-		}
-	}
+    if (pos <= size / 2)
+    {
+        if ((*a)->next && (*b)->next && (*a)->data > max && (*b)->data > max)
+        {
+            rotate_both(a, b);
+            write(1, "rr\n", 3);
+        }
+        else
+        {
+            rotate(b);
+            write(1, "rb\n", 3);
+        }
+    }
+    else
+    {
+        if ((*a)->next && (*b)->next && (*a)->data > max && (*b)->data > max)
+        {
+            reverse_rotate_both(a, b);
+            write(1, "rrr\n", 4);
+        }
+        else
+        {
+            reverse_rotate(b);
+            write(1, "rrb\n", 4);
+        }
+    }
 }
 
-int	elem_in_chunk(t_stack **a, int min_val, int max_val)
+void push_back_sorted(t_stack **b, t_stack **a)
 {
-	t_stack	*tmp;
-	int		count;
+    int max;
+    int pos;
 
-	tmp = *a;
-	count = 0;
-	while (tmp)
-	{
-		if (tmp->data >= min_val && tmp->data < max_val)
-			count++;
-		tmp = tmp->next;
-	}
-	return (count);
+    while (*b)
+    {
+        max = max_nbr(*b);
+        pos = get_position(*b, max);
+
+        while ((*b)->data != max)
+            execute_rotation(a, b, pos, max);
+
+        push_to(b, a);
+        write(1, "pa\n", 3);
+    }
+}
+
+
+void    mechanical_turk_sort(t_stack **a, t_stack **b, int size)
+{
+    int chunk_size;
+    int min_val;
+    int max_val;
+    int median;
+
+    chunk_size = size / 11;
+    if (size <= 100)
+        chunk_size = size / 5;
+    while (*a)
+    {
+        min_val = min_nbr(*a);
+        max_val = min_val + chunk_size;
+        median = (min_val + max_val) / 2;
+        push_chunk_to_b(a, b, min_val, max_val, median);
+    }
+    push_back_sorted(b, a);
+}
+
+int elem_in_chunk(t_stack **a, int min_val, int max_val)
+{
+    t_stack *tmp;
+
+    tmp = *a;
+    while (tmp)
+    {
+        if (tmp->data >= min_val && tmp->data < max_val)
+            return (1);
+        tmp = tmp->next;
+    }
+    return (0);
 }

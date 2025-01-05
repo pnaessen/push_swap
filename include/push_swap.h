@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 12:52:46 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:35:03 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ int					process_push(t_stack **a, t_stack **b, int min, int max,
 void				process_radix_bit(t_stack **a, t_stack **b, int size,
 						int bit);
 
-void				move_max_to_top(t_stack **b, int max);
 void				mechanical_turk_sort(t_stack **a, t_stack **b, int size);
 int					elem_in_chunk(t_stack **a, int min_val, int max_val);
-
+void				push_back_sorted(t_stack **b, t_stack **a);
+void    push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val, int median);
+void execute_rotation(t_stack **a, t_stack **b, int pos, int max);
 
 #endif

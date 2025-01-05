@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:10:42 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/01 16:43:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:39:22 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack) // sa, sb
+void	swap(t_stack *stack)
 {
 	int	temp;
 
@@ -24,13 +24,13 @@ void	swap(t_stack *stack) // sa, sb
 	}
 }
 
-void	swap_both(t_stack *a, t_stack *b) // ss
+void	swap_both(t_stack *a, t_stack *b)
 {
 	swap(a);
 	swap(b);
 }
 
-void	push_to(t_stack **src, t_stack **dest) // pa, pb
+void	push_to(t_stack **src, t_stack **dest)
 {
 	t_stack	*temp;
 
@@ -43,7 +43,7 @@ void	push_to(t_stack **src, t_stack **dest) // pa, pb
 	}
 }
 
-void	rotate(t_stack **stack) // ra, rb
+void	rotate(t_stack **stack)
 {
 	t_stack	*temp;
 	t_stack	*current;
@@ -60,7 +60,7 @@ void	rotate(t_stack **stack) // ra, rb
 	}
 }
 
-void	rotate_both(t_stack **a, t_stack **b) // rr
+void	rotate_both(t_stack **a, t_stack **b)
 {
 	rotate(a);
 	rotate(b);

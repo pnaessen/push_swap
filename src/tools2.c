@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:14:52 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/01 16:43:25 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/05 14:39:07 by pn               ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_valid_number(const char *str)
 	return (1);
 }
 
-void	reverse_rotate(t_stack **stack) // rra, rrb
+void	reverse_rotate(t_stack **stack)
 {
 	t_stack	*prev;
 	t_stack	*current;
@@ -46,7 +46,7 @@ void	reverse_rotate(t_stack **stack) // rra, rrb
 	}
 }
 
-void	reverse_rotate_both(t_stack **a, t_stack **b) // rrr
+void	reverse_rotate_both(t_stack **a, t_stack **b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
