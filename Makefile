@@ -1,11 +1,12 @@
 NAME := push_swap
 
-SRC:= $(addprefix $(SRC_DIR), init.c tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c improved_tools.c temp.c utils.c)
+SRC:= $(addprefix $(SRC_DIR), init.c tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c improved_tools.c temp.c utils.c the_one.c)
 OBJ_DIR:= .obj/
 OBJ:= $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEPS:= $(OBJ:%.o=%.d)
 
 CC:= cc
+#SRCS:= init.c /
 CCFLAGS:= -Wextra -Wall -Werror 
 CPPFLAGS = -MMD -MP
 SRC_DIR:= src/

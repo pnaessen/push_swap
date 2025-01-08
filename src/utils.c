@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 09:27:30 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 09:27:38 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/06 15:21:10 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	process_radix_bit(t_stack **a, t_stack **b, int size, int bit)
 {
-	int count;
+	int	count;
 
 	count = size;
 	while (count > 0)

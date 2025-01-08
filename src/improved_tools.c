@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 16:45:58 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/04 11:03:56 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/07 08:31:45 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	find_position(t_stack *stack, int value)
 
 void	index_stack(t_stack **stack)
 {
-	t_stack *current;
-	t_stack *compare;
-	int index;
+	t_stack	*current;
+	t_stack	*compare;
+	int		index;
 
 	current = *stack;
 	while (current)

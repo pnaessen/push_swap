@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/05 14:35:03 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/08 13:02:32 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <limits.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,7 +24,16 @@ typedef struct s_stack
 	int				data;
 	struct s_stack	*next;
 	int				index;
+	struct s_stack	*prev;
+
 }					t_stack;
+
+typedef struct s_chunk
+{
+	int				min;
+	int				max;
+	int				pushed;
+}					t_chunk;
 
 ///////tools.c////
 void	swap(t_stack *stack);                   // sa, sb
@@ -91,10 +101,22 @@ int					process_push(t_stack **a, t_stack **b, int min, int max,
 void				process_radix_bit(t_stack **a, t_stack **b, int size,
 						int bit);
 
-void				mechanical_turk_sort(t_stack **a, t_stack **b, int size);
-int					elem_in_chunk(t_stack **a, int min_val, int max_val);
+///////the_one.c/////
+void				the_greatest_korean_sort_made_by_PIERRICK(t_stack **a,
+						t_stack **b);
+void				process_push_kr(t_stack **a, t_stack **b, float chunk);
+void				the_greatest_rotation_ever_thant_human_brain_can_imagine(t_stack **b,
+						int pos);
+void				parkinson_algo(t_stack **a, t_stack **b);
+
+////////temp.c///////////////
+void				push_chunk_to_b(t_stack **a, t_stack **b, int min_val,
+						int max_val, int median);
+void				execute_rotation(t_stack **b, int pos);
 void				push_back_sorted(t_stack **b, t_stack **a);
-void    push_chunk_to_b(t_stack **a, t_stack **b, int min_val, int max_val, int median);
-void execute_rotation(t_stack **a, t_stack **b, int pos, int max);
+int					elem_in_chunk(t_stack **a, int min_val, int max_val);
+int					find_closest_in_chunk(t_stack *a, int min_val, int max_val);
+void				not_mechanical_turk_sort(t_stack **a, t_stack **b,
+						int size);
 
 #endif

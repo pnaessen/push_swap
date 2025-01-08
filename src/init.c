@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/05 14:33:38 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/08 10:17:32 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int	main(int argc, char **argv)
 	if (process_args(split_args_result, count, &stack_a) != 0)
 		return (free_split_args(split_args_result, count), 1);
 	free_split_args(split_args_result, count);
-	//choice_algo(&stack_a, &stack_b, count);
-	mechanical_turk_sort(&stack_a, &stack_b, count);
+	choice_algo(&stack_a, &stack_b, count);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
@@ -82,10 +81,12 @@ void	choice_algo(t_stack **a, t_stack **b, int size)
 		sort_three(a);
 	else if (size <= 60)
 		insertion_sort(a, b);
+	// else if (size <= 90)
+	// 	improved_sort(a, b, size);
 	else if (size <= 100)
-		improved_sort(a, b, size);
-	else if (size <= 397)
+		the_greatest_korean_sort_made_by_PIERRICK(a, b);
+	else if (size <= 300)
 		radix_sort(a, b, size);
 	else
-		mechanical_turk_sort(a, b, size); //de 101 a 397
+		the_greatest_korean_sort_made_by_PIERRICK(a, b);
 }

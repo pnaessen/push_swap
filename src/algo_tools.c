@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:25:44 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/05 14:31:13 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/06 15:21:18 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	min_nbr(t_stack *head)
 	return (min);
 }
 
-
 int	max_nbr(t_stack *head)
 {
 	t_stack	*temp;
@@ -48,7 +47,6 @@ int	max_nbr(t_stack *head)
 	}
 	return (max);
 }
-
 
 void	smallest_to_top(t_stack **a, int size)
 {

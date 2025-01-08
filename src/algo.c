@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2025/01/04 14:28:43 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/07 14:10:54 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,27 +91,44 @@ void	sort_three(t_stack **a)
 
 void	improved_sort(t_stack **a, t_stack **b, int size)
 {
-	int	chunk_size;
-	int	min;
-	int	max;
-	int	pushed;
+	int		chunk_size;
+	t_chunk	chunk;
 
 	chunk_size = size / 5;
-	min = 0;
-	max = chunk_size;
-	pushed = 0;
+	chunk.min = 0;
+	chunk.max = chunk_size;
+	chunk.pushed = 0;
 	index_stack(a);
 	while (*a)
 	{
-		pushed = process_push(a, b, min, max, pushed);
-		if (pushed == max - min || stack_size(*a) == 0)
+		chunk.pushed = process_push(a, b, chunk.min, chunk.max, chunk.pushed);
+		if (chunk.pushed == chunk.max - chunk.min || stack_size(*a) == 0)
 		{
-			min = max;
-			max += chunk_size;
-			if (max > size)
-				max = size;
-			pushed = 0;
+			chunk.min = chunk.max;
+			chunk.max += chunk_size;
+			if (chunk.max > size)
+				chunk.max = size;
+			chunk.pushed = 0;
 		}
 	}
 	push_back_to_a(a, b, size);
+}
+void	not_mechanical_turk_sort(t_stack **a, t_stack **b, int size)
+{
+	int chunk_size;
+	int min_val;
+	int max_val;
+	int median;
+
+	chunk_size = size / 11;
+	if (size <= 100)
+		chunk_size = size / 5;
+	while (*a)
+	{
+		min_val = min_nbr(*a);
+		max_val = min_val + chunk_size;
+		median = (min_val + max_val) / 2;
+		push_chunk_to_b(a, b, min_val, max_val, median);
+	}
+	push_back_sorted(b, a);
 }

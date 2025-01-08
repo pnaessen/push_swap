@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:03:51 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/01 16:42:48 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/08 13:20:30 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_stack	*new_node(int value)
 	if (!new_node)
 		return (NULL);
 	new_node->data = value;
-	new_node->next = NULL;
+	new_node->next = new_node;
+	new_node->prev = new_node;
 	return (new_node);
 }
 
@@ -41,6 +42,9 @@ void	add_back(t_stack **head, int value)
 	while (temp->next)
 		temp = temp->next;
 	temp->next = node;
+	node->prev = temp;
+	node->next = *head;
+	(*head)->prev = node
 }
 
 int	is_sorted(t_stack *stack)
