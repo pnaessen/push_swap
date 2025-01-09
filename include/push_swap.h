@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/08 13:02:32 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 09:08:14 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ typedef struct s_chunk
 }					t_chunk;
 
 ///////tools.c////
-void	swap(t_stack *stack);                   // sa, sb
-void	swap_both(t_stack *a, t_stack *b);      // ss
-void	push_to(t_stack **src, t_stack **dest); // pa, pb
-void	rotate(t_stack **stack);                // ra, rb
-void	rotate_both(t_stack **a, t_stack **b);  // rr
+void				swap(t_stack *stack);
+void				swap_both(t_stack *a, t_stack *b);
+void				push_to(t_stack **src, t_stack **dest);
+void				rotate(t_stack **stack);
+void				rotate_both(t_stack **a, t_stack **b);
 
 ///////tools2.c////
 int					is_valid_number(const char *str);
-void	reverse_rotate(t_stack **stack);               // rra, rrb
-void	reverse_rotate_both(t_stack **a, t_stack **b); // rrr
+void				reverse_rotate(t_stack **stack);
+void				reverse_rotate_both(t_stack **a, t_stack **b);
 void				free_stack(t_stack **stack);
 void				free_split_args(char **split_args, int count);
 
@@ -75,7 +75,6 @@ void				*free_all(char **res, int count);
 void				radix_sort(t_stack **a, t_stack **b, int size);
 void				insertion_sort(t_stack **a, t_stack **b);
 void				sort_three(t_stack **a);
-void				improved_sort(t_stack **a, t_stack **b, int size);
 
 //////////algo_tools.c//////////
 int					max_nbr(t_stack *head);
@@ -89,34 +88,17 @@ int					process_args(char **split_args, int count, t_stack **stack);
 int					is_duplicate(t_stack *head, int value);
 void				choice_algo(t_stack **a, t_stack **b, int size);
 
-/////////improved_tools.c////////
-int					find_closest(t_stack **a, int min, int max);
-void				push_back_to_a(t_stack **a, t_stack **b, int size);
-int					find_position(t_stack *stack, int value);
-void				index_stack(t_stack **stack);
-int					process_push(t_stack **a, t_stack **b, int min, int max,
-						int pushed);
-
 /////////utils.c////////
 void				process_radix_bit(t_stack **a, t_stack **b, int size,
 						int bit);
+void				index_stack(t_stack **stack);
 
 ///////the_one.c/////
-void				the_greatest_korean_sort_made_by_PIERRICK(t_stack **a,
+void				the_greatest_korean_sort_made_by_pierrick(t_stack **a,
 						t_stack **b);
 void				process_push_kr(t_stack **a, t_stack **b, float chunk);
-void				the_greatest_rotation_ever_thant_human_brain_can_imagine(t_stack **b,
+void				the_greatest_rotation_ever_that_human_brain_can_imagine(t_stack **b,
 						int pos);
 void				parkinson_algo(t_stack **a, t_stack **b);
-
-////////temp.c///////////////
-void				push_chunk_to_b(t_stack **a, t_stack **b, int min_val,
-						int max_val, int median);
-void				execute_rotation(t_stack **b, int pos);
-void				push_back_sorted(t_stack **b, t_stack **a);
-int					elem_in_chunk(t_stack **a, int min_val, int max_val);
-int					find_closest_in_chunk(t_stack *a, int min_val, int max_val);
-void				not_mechanical_turk_sort(t_stack **a, t_stack **b,
-						int size);
 
 #endif

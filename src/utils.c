@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 09:27:30 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/06 15:21:10 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 09:07:58 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,26 @@ void	process_radix_bit(t_stack **a, t_stack **b, int size, int bit)
 			write(1, "pb\n", 3);
 		}
 		count--;
+	}
+}
+void	index_stack(t_stack **stack)
+{
+	t_stack	*current;
+	t_stack	*compare;
+	int		index;
+
+	current = *stack;
+	while (current)
+	{
+		index = 0;
+		compare = *stack;
+		while (compare)
+		{
+			if (compare->data < current->data)
+				index++;
+			compare = compare->next;
+		}
+		current->index = index;
+		current = current->next;
 	}
 }

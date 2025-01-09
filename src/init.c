@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/08 10:17:32 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 09:02:34 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,12 @@ void	choice_algo(t_stack **a, t_stack **b, int size)
 		return ;
 	if (size == 3)
 		sort_three(a);
-	else if (size <= 60)
+	else if (size <= 30)
 		insertion_sort(a, b);
-	// else if (size <= 90)
-	// 	improved_sort(a, b, size);
 	else if (size <= 100)
-		the_greatest_korean_sort_made_by_PIERRICK(a, b);
+		the_greatest_korean_sort_made_by_pierrick(a, b);
 	else if (size <= 300)
 		radix_sort(a, b, size);
 	else
-		the_greatest_korean_sort_made_by_PIERRICK(a, b);
+		the_greatest_korean_sort_made_by_pierrick(a, b);
 }

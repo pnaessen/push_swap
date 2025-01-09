@@ -6,13 +6,13 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:34:32 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/08 12:48:51 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 09:06:10 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	the_greatest_korean_sort_made_by_PIERRICK(t_stack **a, t_stack **b)
+void	the_greatest_korean_sort_made_by_pierrick(t_stack **a, t_stack **b)
 {
 	const size_t	size = stack_size(*a);
 	float			chunk;
@@ -23,9 +23,9 @@ void	the_greatest_korean_sort_made_by_PIERRICK(t_stack **a, t_stack **b)
 	else
 		chunk = (0.000008 * (size * size)) + (0.03 * size) + 18;
 	process_push_kr(a, b, chunk);
-	// sort_three(a);
 	parkinson_algo(a, b);
 }
+
 void	process_push_kr(t_stack **a, t_stack **b, float chunk)
 {
 	size_t	size;
@@ -33,7 +33,7 @@ void	process_push_kr(t_stack **a, t_stack **b, float chunk)
 
 	size = stack_size(*a);
 	cmp_index = 0;
-	while (*a) // ou size > 3
+	while (*a)
 	{
 		if ((*a)->index <= cmp_index)
 		{
@@ -42,7 +42,7 @@ void	process_push_kr(t_stack **a, t_stack **b, float chunk)
 			push_to(a, b);
 			write(1, "pb\n", 3);
 		}
-		else if ((*a) && (*a)->index < (cmp_index + chunk)) // 03 21 54 77 70
+		else if ((*a) && (*a)->index < (cmp_index + chunk))
 		{
 			size--;
 			cmp_index++;
@@ -66,6 +66,7 @@ void	process_push_kr(t_stack **a, t_stack **b, float chunk)
 		}
 	}
 }
+
 void	parkinson_algo(t_stack **a, t_stack **b)
 {
 	int	max;
