@@ -6,13 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/09 09:02:34 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 17:27:50 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
@@ -48,7 +46,7 @@ int	process_args(char **split_args, int count, t_stack **stack)
 	i = 0;
 	while (i < count)
 	{
-		value = ft_atoi(split_args[i], stack, split_args, count);
+		value = ft_atol(split_args[i], stack, split_args, count);
 		if (is_duplicate(*stack, value))
 		{
 			write(1, "Error\n", 6);
@@ -62,24 +60,13 @@ int	process_args(char **split_args, int count, t_stack **stack)
 	return (0);
 }
 
-int	is_duplicate(t_stack *head, int value)
-{
-	while (head)
-	{
-		if (head->data == value)
-			return (1);
-		head = head->next;
-	}
-	return (0);
-}
-
 void	choice_algo(t_stack **a, t_stack **b, int size)
 {
 	if (is_sorted(*a))
 		return ;
 	if (size == 3)
 		sort_three(a);
-	else if (size <= 30)
+	else if (size <= 12)
 		insertion_sort(a, b);
 	else if (size <= 100)
 		the_greatest_korean_sort_made_by_pierrick(a, b);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:49:40 by pn                #+#    #+#             */
-/*   Updated: 2025/01/05 14:38:37 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 08:51:35 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(char *str, t_stack **stack, char **split_args, int count)
+int	ft_atol(char *str, t_stack **stack, char **split_args, int count)
 {
 	int			i;
 	int			sign;
@@ -37,25 +37,6 @@ int	ft_atoi(char *str, t_stack **stack, char **split_args, int count)
 		exit(EXIT_FAILURE);
 	}
 	return ((int)(nb * sign));
-}
-
-char	*ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst || !src)
-		return (NULL);
-	if (size > 0)
-	{
-		while (src[i] && i < size - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (dst);
 }
 
 int	calculate_length(int argc, char **argv)

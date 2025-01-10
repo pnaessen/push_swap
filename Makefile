@@ -1,30 +1,43 @@
 NAME := push_swap
 
-SRC:= $(addprefix $(SRC_DIR), init.c tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c  utils.c the_one.c)
+SRC:= $(addprefix $(SRC_DIR), tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c  utils.c the_one.c)
+ifdef BONUS
+	SRC:= $(SRC) $(addprefix $(SRC_DIR), checker_init.c)
+else	
+	SRC:= $(SRC) $(addprefix $(SRC_DIR), init.c)
+endif
 OBJ_DIR:= .obj/
 OBJ:= $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEPS:= $(OBJ:%.o=%.d)
 
 CC:= cc
-#SRCS:= init.c /
+#SRCS:= init.c \
+
 CCFLAGS:= -Wextra -Wall -Werror 
 CPPFLAGS = -MMD -MP
 SRC_DIR:= src/
 INCLUDES:= include/
 
-HEADERS:= -I $(INCLUDES)
+LIBFT_DIR := libft/
+LIBFT := $(LIBFT_DIR)libft.a 
+LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
+
+HEADERS:= -I $(INCLUDES) -I $(LIBFT_DIR)
 
 all: welcome $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CCFLAGS) $(OBJ) -o $(NAME)
-	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ)  -o $(NAME)$(DEF_COLOR)"
+	$(MAKE) -C $(LIBFT_DIR)
+	$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)
+	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)$(DEF_COLOR)"
 	@echo "$(GREEN)🧝‍♂️ Un lutin a aidé à compiler $(NAME)! Joyeux Noël ! 🧝‍♂️$(DEF_COLOR)"
-
+	
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
+	
+
 
 -include $(DEPS)
 # Colors
@@ -42,6 +55,8 @@ WHITE = \033[0;97m
 welcome:
 	@echo "🚀 $(CYAN)Starting compilation of $(NAME)... Hold on to your bits! $(DEF_COLOR)"
 
+bonus:
+	$(MAKE) BONUS=1 all
 clean:
 	@echo "🧹 $(YELLOW)Cleaning object files...$(DEF_COLOR)"
 	rm -rf $(OBJ_DIR)
@@ -57,8 +72,8 @@ fclean: clean
 	@echo "      ' . . . . . . . . '"
 	@echo "$(DEF_COLOR)"
 	@echo "$(RED)🧨🧨🧨🧨🧨💥 $(NAME) remove 💥🧨🧨🧨🧨🧨 $(DEF_COLOR)"
+	$(MAKE) fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)
-
 re: fclean all
 
 

@@ -6,59 +6,45 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:34:32 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/09 09:06:10 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 08:39:23 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	the_greatest_korean_sort_made_by_pierrick(t_stack **a, t_stack **b)
+void	handle_push_a_to_b(t_stack **a, t_stack **b, int *cmp_index)
 {
-	const size_t	size = stack_size(*a);
-	float			chunk;
+	(*cmp_index)++;
+	push_to(a, b);
+	write(1, "pb\n", 3);
+}
 
-	index_stack(a);
-	if (size <= 100)
-		chunk = (0.000008 * (size * size)) + (0.03 * size) + 11;
+void	handle_push_kr(t_stack **a, t_stack **b, int *cmp_index)
+{
+	handle_push_a_to_b(a, b, cmp_index);
+	if ((*a) && (*a)->index >= *cmp_index)
+	{
+		rotate_both(a, b);
+		write(1, "rr\n", 3);
+	}
 	else
-		chunk = (0.000008 * (size * size)) + (0.03 * size) + 18;
-	process_push_kr(a, b, chunk);
-	parkinson_algo(a, b);
+	{
+		rotate(b);
+		write(1, "rb\n", 3);
+	}
 }
 
 void	process_push_kr(t_stack **a, t_stack **b, float chunk)
 {
-	size_t	size;
-	int		cmp_index;
+	int	cmp_index;
 
-	size = stack_size(*a);
 	cmp_index = 0;
 	while (*a)
 	{
 		if ((*a)->index <= cmp_index)
-		{
-			size--;
-			cmp_index++;
-			push_to(a, b);
-			write(1, "pb\n", 3);
-		}
+			handle_push_a_to_b(a, b, &cmp_index);
 		else if ((*a) && (*a)->index < (cmp_index + chunk))
-		{
-			size--;
-			cmp_index++;
-			push_to(a, b);
-			write(1, "pb\n", 3);
-			if ((*a)->index >= cmp_index)
-			{
-				rotate_both(a, b);
-				write(1, "rr\n", 3);
-			}
-			else
-			{
-				rotate(b);
-				write(1, "rb\n", 3);
-			}
-		}
+			handle_push_kr(a, b, &cmp_index);
 		else
 		{
 			rotate(a);

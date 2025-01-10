@@ -6,13 +6,14 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/09 09:08:14 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 08:51:28 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "libft.h"
 # include <limits.h>
 # include <math.h>
 # include <stdio.h>
@@ -64,9 +65,8 @@ char				*allocate_word(const char *start, const char *end);
 char				**split_args(const char *str, int *count);
 
 ///////tools_pars.c////
-int					ft_atoi(char *str, t_stack **stack, char **split_args,
+int					ft_atol(char *str, t_stack **stack, char **split_args,
 						int count);
-char				*ft_strlcpy(char *dst, const char *src, size_t size);
 int					calculate_length(int argc, char **argv);
 const char			*skip_whitespace(const char *str);
 void				*free_all(char **res, int count);
@@ -75,6 +75,8 @@ void				*free_all(char **res, int count);
 void				radix_sort(t_stack **a, t_stack **b, int size);
 void				insertion_sort(t_stack **a, t_stack **b);
 void				sort_three(t_stack **a);
+void				the_greatest_korean_sort_made_by_pierrick(t_stack **a,
+						t_stack **b);
 
 //////////algo_tools.c//////////
 int					max_nbr(t_stack *head);
@@ -85,20 +87,26 @@ void				handle_three(t_stack **a, int first, int second, int third);
 
 //////////init.c//////////
 int					process_args(char **split_args, int count, t_stack **stack);
-int					is_duplicate(t_stack *head, int value);
 void				choice_algo(t_stack **a, t_stack **b, int size);
 
 /////////utils.c////////
 void				process_radix_bit(t_stack **a, t_stack **b, int size,
 						int bit);
 void				index_stack(t_stack **stack);
+int					is_duplicate(t_stack *head, int value);
+void				print_stack(t_stack *stack);
 
 ///////the_one.c/////
-void				the_greatest_korean_sort_made_by_pierrick(t_stack **a,
-						t_stack **b);
 void				process_push_kr(t_stack **a, t_stack **b, float chunk);
 void				the_greatest_rotation_ever_that_human_brain_can_imagine(t_stack **b,
 						int pos);
 void				parkinson_algo(t_stack **a, t_stack **b);
+void				handle_push_kr(t_stack **a, t_stack **b, int *cmp_index);
+void				handle_push_a_to_b(t_stack **a, t_stack **b,
+						int *cmp_index);
+
+//////////checker_init.c/////////////
+int					ft_strcmp(const char *s1, const char *s2);
+int					check_instruction(t_stack **a, t_stack **b, char *line);
 
 #endif

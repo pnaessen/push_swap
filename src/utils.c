@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 09:27:30 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/09 09:07:58 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 08:45:53 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	process_radix_bit(t_stack **a, t_stack **b, int size, int bit)
 		count--;
 	}
 }
+
 void	index_stack(t_stack **stack)
 {
 	t_stack	*current;
@@ -52,4 +53,29 @@ void	index_stack(t_stack **stack)
 		current->index = index;
 		current = current->next;
 	}
+}
+
+int	is_duplicate(t_stack *head, int value)
+{
+	while (head)
+	{
+		if (head->data == value)
+			return (1);
+		head = head->next;
+	}
+	return (0);
+}
+
+void	print_stack(t_stack *stack)
+{
+	t_stack	*tmp;
+
+	tmp = stack;
+	printf("Valeurs de la liste : ");
+	while (tmp != NULL)
+	{
+		printf("%d ", tmp->data);
+		tmp = tmp->next;
+	}
+	printf("\n");
 }

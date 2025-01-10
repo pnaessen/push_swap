@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:14:52 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/05 14:39:07 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/09 11:21:07 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	free_stack(t_stack **stack)
 {
 	t_stack	*temp;
 
+	if (*stack == NULL || stack == NULL)
+		return ;
 	while (*stack)
 	{
 		temp = *stack;
