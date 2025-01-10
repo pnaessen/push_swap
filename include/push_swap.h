@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 08:51:28 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 12:22:15 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ typedef struct s_stack
 	struct s_stack	*prev;
 
 }					t_stack;
-
-typedef struct s_chunk
-{
-	int				min;
-	int				max;
-	int				pushed;
-}					t_chunk;
 
 ///////tools.c////
 void				swap(t_stack *stack);
@@ -94,19 +87,27 @@ void				process_radix_bit(t_stack **a, t_stack **b, int size,
 						int bit);
 void				index_stack(t_stack **stack);
 int					is_duplicate(t_stack *head, int value);
-void				print_stack(t_stack *stack);
 
-///////the_one.c/////
+///////kr_tools.c/////
 void				process_push_kr(t_stack **a, t_stack **b, float chunk);
-void				the_greatest_rotation_ever_that_human_brain_can_imagine(t_stack **b,
+void				the_greatest_rot_ever_that_human_can_imagine(t_stack **b,
 						int pos);
 void				parkinson_algo(t_stack **a, t_stack **b);
 void				handle_push_kr(t_stack **a, t_stack **b, int *cmp_index);
 void				handle_push_a_to_b(t_stack **a, t_stack **b,
 						int *cmp_index);
 
-//////////checker_init.c/////////////
-int					ft_strcmp(const char *s1, const char *s2);
+//////////checker_init.c//////////////////////////
 int					check_instruction(t_stack **a, t_stack **b, char *line);
+int					is_argv_valid(const char *str);
+
+//////////checker_tools.c//////////////////////////
+int					ft_strcmp(const char *s1, const char *s2);
+int					instruction_and_update(t_stack **a, t_stack **b,
+						char *line);
+int					pars_check_and_create(t_stack **a, t_stack **b, int argc,
+						char **argv);
+void				handle_error(t_stack **a);
+int					ft_atroi(const char *nptr, t_stack **a);
 
 #endif

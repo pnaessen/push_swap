@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 09:27:30 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 08:45:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 12:21:48 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,4 @@ int	is_duplicate(t_stack *head, int value)
 		head = head->next;
 	}
 	return (0);
-}
-
-void	print_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	tmp = stack;
-	printf("Valeurs de la liste : ");
-	while (tmp != NULL)
-	{
-		printf("%d ", tmp->data);
-		tmp = tmp->next;
-	}
-	printf("\n");
 }

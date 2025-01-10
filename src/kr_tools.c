@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:34:32 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 08:39:23 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/10 12:12:54 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	parkinson_algo(t_stack **a, t_stack **b)
 		max = max_nbr(*b);
 		pos = get_position(*b, max);
 		while ((*b)->data != max)
-			the_greatest_rotation_ever_that_human_brain_can_imagine(b, pos);
+			the_greatest_rot_ever_that_human_can_imagine(b, pos);
 		push_to(b, a);
 		write(1, "pa\n", 3);
 	}
 }
 
-void	the_greatest_rotation_ever_that_human_brain_can_imagine(t_stack **b,
+void	the_greatest_rot_ever_that_human_can_imagine(t_stack **b,
 		int pos)
 {
 	int	size;
