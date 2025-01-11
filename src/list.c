@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:03:51 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 10:35:12 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/11 17:04:03 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ t_stack	*new_node(int value)
 		return (NULL);
 	new_node->data = value;
 	new_node->next = NULL;
+	new_node->prev = NULL;
 	return (new_node);
 }
 
 void	add_back(t_stack **head, int value)
 {
 	t_stack	*node;
-	t_stack	*temp;
+	t_stack	*last;
 
 	node = new_node(value);
 	if (!node)
@@ -35,17 +36,28 @@ void	add_back(t_stack **head, int value)
 	if (!*head)
 	{
 		*head = node;
+		node->prev = *head;
+		node->next = *head;
 		return ;
 	}
-	temp = *head;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = node;
+	else
+	{
+		last = (*head)->prev;
+		node->next = *head;
+		node->prev = last;
+		last->next = node;
+		(*head)->prev = node;
+	}
 }
 
 int	is_sorted(t_stack *stack)
 {
-	while (stack && stack->next)
+	t_stack	*start;
+
+	if (!stack)
+		return (1);
+	start = stack;
+	while (stack->next != start)
 	{
 		if (stack->data > stack->next->data)
 			return (0);
@@ -57,31 +69,37 @@ int	is_sorted(t_stack *stack)
 int	stack_size(t_stack *stack)
 {
 	int		size;
-	t_stack	*temp;
+	t_stack	*start;
 
-	size = 0;
-	temp = stack;
-	while (temp)
+	if (!stack)
+		return (0);
+	size = 1;
+	start = stack;
+	while (stack->next != start)
 	{
 		size++;
-		temp = temp->next;
+		stack = stack->next;
 	}
 	return (size);
 }
 
-int	get_position(t_stack *stack, int value)
+void	free_stack(t_stack **stack)
 {
-	int		position;
 	t_stack	*current;
+	t_stack	*next;
+	t_stack	*start;
 
-	position = 0;
-	current = stack;
-	while (current)
+	if (!*stack)
+		return ;
+	start = *stack;
+	current = *stack;
+	while (1)
 	{
-		if (current->data == value)
-			return (position);
-		current = current->next;
-		position++;
+		next = current->next;
+		free(current);
+		if (next == start)
+			break ;
+		current = next;
 	}
-	return (-1);
+	*stack = NULL;
 }

@@ -3,24 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pn <pn@student.42lyon.fr>                  +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:10:42 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/05 14:39:22 by pn               ###   ########lyon.fr   */
+/*   Updated: 2025/01/11 17:10:26 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack)
+void	swap(t_stack *a)
 {
-	int	temp;
+	int	temp_data;
+	int	temp_index;
 
-	if (stack && stack->next)
+	if (a && a->next)
 	{
-		temp = stack->data;
-		stack->data = stack->next->data;
-		stack->next->data = temp;
+		temp_data = a->data;
+		a->data = a->next->data;
+		a->next->data = temp_data;
+		temp_index = a->index;
+		a->index = a->next->index;
+		a->next->index = temp_index;
 	}
 }
 
@@ -34,30 +38,14 @@ void	push_to(t_stack **src, t_stack **dest)
 {
 	t_stack	*temp;
 
-	if (*src)
-	{
-		temp = *src;
-		*src = (*src)->next;
-		temp->next = *dest;
-		*dest = temp;
-	}
+	temp = pop_from(src);
+	add_to(dest, temp);
 }
 
 void	rotate(t_stack **stack)
 {
-	t_stack	*temp;
-	t_stack	*current;
-
-	if (*stack && (*stack)->next)
-	{
-		temp = *stack;
+	if (*stack && (*stack)->next != *stack)
 		*stack = (*stack)->next;
-		temp->next = NULL;
-		current = *stack;
-		while (current->next)
-			current = current->next;
-		current->next = temp;
-	}
 }
 
 void	rotate_both(t_stack **a, t_stack **b)

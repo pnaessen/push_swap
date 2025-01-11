@@ -6,32 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2025/01/10 08:39:12 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/11 16:52:23 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	radix_sort(t_stack **a, t_stack **b, int size)
-{
-	int	max_num;
-	int	max_bits;
-	int	bit;
-
-	max_num = max_nbr(*a);
-	max_bits = 0;
-	while ((max_num >> max_bits) != 0)
-		max_bits++;
-	bit = 0;
-	while (bit < max_bits)
-	{
-		process_radix_bit(a, b, size, bit);
-		push_all_back(b, a);
-		bit++;
-		if (is_sorted(*a))
-			return ;
-	}
-}
 
 void	insertion_sort(t_stack **a, t_stack **b)
 {
@@ -93,11 +72,12 @@ void	the_greatest_korean_sort_made_by_pierrick(t_stack **a, t_stack **b)
 	const size_t	size = stack_size(*a);
 	float			chunk;
 
-	index_stack(a);
+	init_index(a);
 	if (size <= 100)
 		chunk = (0.000008 * (size * size)) + (0.03 * size) + 11;
 	else
 		chunk = (0.000008 * (size * size)) + (0.03 * size) + 18;
 	process_push_kr(a, b, chunk);
+	sort_three(a);
 	parkinson_algo(a, b);
 }

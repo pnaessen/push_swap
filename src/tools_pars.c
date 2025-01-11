@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:49:40 by pn                #+#    #+#             */
-/*   Updated: 2025/01/10 08:51:35 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/11 17:07:48 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,18 @@ void	*free_all(char **res, int count)
 	}
 	free(res);
 	return (NULL);
+}
+
+int	is_valid_number(const char *str)
+{
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9') && *str != ' ' && *str != '-')
+		{
+			write(1, "Error\n", 6);
+			return (0);
+		}
+		str++;
+	}
+	return (1);
 }

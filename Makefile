@@ -1,6 +1,6 @@
 NAME := push_swap
 
-SRC:= $(addprefix $(SRC_DIR), tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c  utils.c kr_tools.c)
+SRC:= $(addprefix $(SRC_DIR), tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c  utils.c kr_tools.c kr_utils.c)
 ifdef BONUS
 	SRC:= $(SRC) $(addprefix $(SRC_DIR), checker_init.c checker_tools.c)
 else	
@@ -24,8 +24,7 @@ HEADERS:= -I $(INCLUDES) -I $(LIBFT_DIR)
 
 all: welcome $(NAME)
 
-$(NAME): $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR)
+$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)
 	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)$(DEF_COLOR)"
 	@echo "$(GREEN)🧝‍♂️ Un lutin a aidé à compiler $(NAME)! Joyeux Noël ! 🧝‍♂️$(DEF_COLOR)"
@@ -35,7 +34,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
 	
-
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 -include $(DEPS)
 # Colors

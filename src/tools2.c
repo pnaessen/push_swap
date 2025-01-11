@@ -6,64 +6,22 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:14:52 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/09 11:21:07 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/11 17:10:13 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_valid_number(const char *str)
-{
-	while (*str)
-	{
-		if (!(*str >= '0' && *str <= '9') && *str != ' ' && *str != '-')
-		{
-			write(1, "Error\n", 6);
-			return (0);
-		}
-		str++;
-	}
-	return (1);
-}
-
 void	reverse_rotate(t_stack **stack)
 {
-	t_stack	*prev;
-	t_stack	*current;
-
-	if (*stack && (*stack)->next)
-	{
-		prev = NULL;
-		current = *stack;
-		while (current->next)
-		{
-			prev = current;
-			current = current->next;
-		}
-		prev->next = NULL;
-		current->next = *stack;
-		*stack = current;
-	}
+	if (*stack && (*stack)->next != *stack)
+		*stack = (*stack)->prev;
 }
 
 void	reverse_rotate_both(t_stack **a, t_stack **b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
-}
-
-void	free_stack(t_stack **stack)
-{
-	t_stack	*temp;
-
-	if (*stack == NULL || stack == NULL)
-		return ;
-	while (*stack)
-	{
-		temp = *stack;
-		*stack = (*stack)->next;
-		free(temp);
-	}
 }
 
 void	free_split_args(char **split_args, int count)
@@ -77,4 +35,44 @@ void	free_split_args(char **split_args, int count)
 		i++;
 	}
 	free(split_args);
+}
+
+t_stack	*pop_from(t_stack **src)
+{
+	t_stack	*temp;
+
+	temp = NULL;
+	if (*src)
+	{
+		temp = *src;
+		if ((*src)->next == *src)
+			*src = NULL;
+		else
+		{
+			*src = (*src)->next;
+			(*src)->prev = temp->prev;
+			temp->prev->next = *src;
+		}
+	}
+	return (temp);
+}
+
+void	add_to(t_stack **dest, t_stack *temp)
+{
+	if (temp)
+	{
+		if (*dest)
+		{
+			temp->next = *dest;
+			temp->prev = (*dest)->prev;
+			(*dest)->prev->next = temp;
+			(*dest)->prev = temp;
+		}
+		else
+		{
+			temp->next = temp;
+			temp->prev = temp;
+		}
+		*dest = temp;
+	}
 }
