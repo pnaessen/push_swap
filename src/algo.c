@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 14:34:08 by pn                #+#    #+#             */
-/*   Updated: 2025/01/11 16:52:23 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/13 08:54:45 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,16 @@ void	sort_three(t_stack **a)
 		handle_three(a, first, second, third);
 }
 
-void	the_greatest_korean_sort_made_by_pierrick(t_stack **a, t_stack **b)
+void	the_greatest_korean_sort(t_stack **a, t_stack **b)
 {
 	const size_t	size = stack_size(*a);
 	float			chunk;
 
 	init_index(a);
 	if (size <= 100)
-		chunk = (0.000008 * (size * size)) + (0.03 * size) + 11;
+		chunk = (QUADRATIQUE * (size * size)) + (0.03 * size) + CHUNK_LARGE;
 	else
-		chunk = (0.000008 * (size * size)) + (0.03 * size) + 18;
+		chunk = (QUADRATIQUE * (size * size)) + (0.03 * size) + CHUNK_LARGE;
 	process_push_kr(a, b, chunk);
 	sort_three(a);
 	parkinson_algo(a, b);

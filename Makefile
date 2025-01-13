@@ -19,6 +19,7 @@ INCLUDES:= include/
 LIBFT_DIR := libft/
 LIBFT := $(LIBFT_DIR)libft.a 
 LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
+LIBFT_DEPS := $(LIBFT_DIR)Makefile
 
 HEADERS:= -I $(INCLUDES) -I $(LIBFT_DIR)
 
@@ -34,11 +35,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
 	
-$(LIBFT):
+$(LIBFT): $(LIBFT_DEPS)
 	$(MAKE) -C $(LIBFT_DIR)
 
--include $(DEPS)
-# Colors
 
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
@@ -74,24 +73,10 @@ fclean: clean
 	rm -f $(NAME)
 re: fclean all
 
-
-# explosion:
-#	@echo "$(RED)💥 Animation d'explosion...$(DEF_COLOR)"
-#	@bash -c ' \
-	for i in {1..5}; do \
-		clear; \
-		echo "        *        "; \
-		echo "       ***       "; \
-		echo "      *****      "; \
-		echo "     *******     "; \
-		echo "    *********    "; \
-		sleep 0.5; \
-	done; \
-	clear; \
-	echo "(Il n\'y a rien ici)"; \
-	'
 info:
 	@echo "OBJ": $(OBJ)
 	@echo "DEPS": $(DEPS)
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re

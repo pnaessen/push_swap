@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/11 17:05:47 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/13 08:54:51 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define CHUNK_LARGE 18
+# define CHUNK_MEDIUM 11
+# define QUADRATIQUE 0.000008
 
 typedef struct s_stack
 {
@@ -67,8 +71,7 @@ int					is_valid_number(const char *str);
 //////////algo.c//////////
 void				insertion_sort(t_stack **a, t_stack **b);
 void				sort_three(t_stack **a);
-void				the_greatest_korean_sort_made_by_pierrick(t_stack **a,
-						t_stack **b);
+void				the_greatest_korean_sort(t_stack **a, t_stack **b);
 
 //////////algo_tools.c//////////
 int					min_nbr(t_stack *head);
