@@ -14,12 +14,12 @@ CC:= cc
 CCFLAGS:= -Wextra -Wall -Werror 
 CPPFLAGS = -MMD -MP
 SRC_DIR:= src/
-INCLUDES:= include/
+INCLUDES:= include/ 	
 
 LIBFT_DIR := libft/
 LIBFT := $(LIBFT_DIR)libft.a 
 LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
-LIBFT_DEPS := $(LIBFT_DIR)Makefile
+# LIBFT_DEPS := $(LIBFT_DIR)Makefile
 
 HEADERS:= -I $(INCLUDES) -I $(LIBFT_DIR)
 
@@ -30,13 +30,14 @@ $(NAME): $(OBJ) $(LIBFT)
 	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)$(DEF_COLOR)"
 	@echo "$(GREEN)🧝‍♂️ Un lutin a aidé à compiler $(NAME)! Joyeux Noël ! 🧝‍♂️$(DEF_COLOR)"
 	
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(LIBFT)
 	@mkdir -p $(OBJ_DIR)
 	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
 	
-$(LIBFT): $(LIBFT_DEPS)
+$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR)
+FORCE :
 
 
 DEF_COLOR = \033[0;39m
