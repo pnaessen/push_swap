@@ -1,4 +1,9 @@
 NAME := push_swap
+ifdef BONUS
+  NAME := checker
+endif
+
+NAME_BONUS := checker
 
 SRC:= $(addprefix $(SRC_DIR), tools.c pars.c list.c tools_pars.c algo.c algo_tools.c tools2.c  utils.c kr_tools.c kr_utils.c)
 ifdef BONUS
@@ -19,25 +24,27 @@ INCLUDES:= include/
 LIBFT_DIR := libft/
 LIBFT := $(LIBFT_DIR)libft.a 
 LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
-# LIBFT_DEPS := $(LIBFT_DIR)Makefile
+LIBFT_DEPS := $(LIBFT_DIR)Makefile
 
 HEADERS:= -I $(INCLUDES) -I $(LIBFT_DIR)
 
 all: welcome $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME):  $(LIBFT) $(OBJ)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)
 	@echo "👨‍🍳 Cooking up binary goodness: $(BLUE)$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)$(DEF_COLOR)"
 	@echo "$(GREEN)🧝‍♂️ Un lutin a aidé à compiler $(NAME)! Joyeux Noël ! 🧝‍♂️$(DEF_COLOR)"
 	
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(LIBFT)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@echo "🛠️  $(MAGENTA)Compiling: $< $(DEF_COLOR)"
 	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -o $@ -c $<
-	
-$(LIBFT): FORCE
+
+$(LIBFT): libft
+
+libft:
 	$(MAKE) -C $(LIBFT_DIR)
-FORCE :
+
 
 
 DEF_COLOR = \033[0;39m
@@ -71,7 +78,7 @@ fclean: clean
 	@echo "$(DEF_COLOR)"
 	@echo "$(RED)🧨🧨🧨🧨🧨💥 $(NAME) remove 💥🧨🧨🧨🧨🧨 $(DEF_COLOR)"
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 re: fclean all
 
 info:
@@ -80,4 +87,4 @@ info:
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft

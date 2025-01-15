@@ -6,13 +6,13 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 11:01:20 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 12:09:46 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 13:56:25 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	pars_check_and_create(t_stack **a, t_stack **b, int argc, char **argv)
+int	pars_check_and_create(t_stack **a, int argc, char **argv)
 {
 	int	i;
 	int	value;
@@ -27,13 +27,6 @@ int	pars_check_and_create(t_stack **a, t_stack **b, int argc, char **argv)
 			handle_error(a);
 		i++;
 		add_back(a, value);
-	}
-	if (is_sorted(*a) && *b == NULL)
-	{
-		write(1, "OK\n", 3);
-		free_stack(a);
-		free_stack(b);
-		exit(EXIT_SUCCESS);
 	}
 	return (0);
 }

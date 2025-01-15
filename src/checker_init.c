@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:30:02 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/10 12:21:59 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 13:55:55 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
-	pars_check_and_create(&stack_a, &stack_b, argc, argv);
+	pars_check_and_create(&stack_a, argc, argv);
 	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
@@ -32,6 +32,8 @@ int	main(int argc, char **argv)
 	}
 	if (!is_sorted(stack_a) || stack_b != NULL)
 		write(1, "KO\n", 3);
+	if (is_sorted(stack_a) && stack_b == NULL)
+		write(1, "OK\n", 3);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

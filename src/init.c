@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:12:39 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/13 08:40:48 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 10:58:56 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
+	if (argc <= 1)
+		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
 	joined_args = strjoin(argc, argv);

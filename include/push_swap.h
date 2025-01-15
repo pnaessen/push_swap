@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:08:36 by pnaessen          #+#    #+#             */
-/*   Updated: 2025/01/13 08:54:51 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 13:54:21 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,7 @@ int					is_argv_valid(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					instruction_and_update(t_stack **a, t_stack **b,
 						char *line);
-int					pars_check_and_create(t_stack **a, t_stack **b, int argc,
-						char **argv);
+int					pars_check_and_create(t_stack **a, int argc, char **argv);
 void				handle_error(t_stack **a);
 int					ft_atroi(const char *nptr, t_stack **a);
 
