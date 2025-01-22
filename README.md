@@ -45,10 +45,13 @@ Le checker permet de vérifier si les instructions générées par push_swap ont
 
 ### Pour vérifier les instructions générées :
 
-```bash ./push_swap 3 2 1 | ./checker 3 2 1```
+```bash
+./push_swap 3 2 1 | ./checker 3 2 1
+```
+
 
 ## Project Structure 📁
-
+```
 📁 libft/
 📁 src/ 
 │ ├── algo.c 
@@ -65,4 +68,5 @@ Le checker permet de vérifier si les instructions générées par push_swap ont
 │ ├── tools_pars.c 
 │ └── utils.c 
 📁 include/
-└── Makefile 
+└── Makefile
+```
