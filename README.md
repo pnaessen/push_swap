@@ -12,19 +12,23 @@ L'algorithme coréen est une méthode efficace pour trier une pile en plusieurs 
 
 ### Étapes principales :
 
-#### Découpage en groupes :
+#### Utilisation d'un Chunk Dynamique :
 
-- Les nombres dans la pile A sont divisés en sous-groupes basés sur leur taille relative (par exemple, via des intervalles calculés avec des médianes).
-- Chaque groupe est trié individuellement et transféré partiellement dans la pile B.
+- Un seul chunk est utilisé, sa taille augmente au fur et à mesure du tri.
+- Les éléments sont sélectionnés pour le transfert basé sur ce chunk.
 
-#### Utilisation de pivots :
+#### Transfert Progressif :
 
-- Pour chaque groupe, un pivot est choisi.
-- Les nombres plus petits que le pivot sont envoyés dans la pile B, tandis que les autres restent dans A.
+- Les éléments appartenant au chunk actuel sont transférés de la pile A vers la pile B.
+- À chaque transfert, la taille du chunk est incrémentée.
 
-#### Remise en place :
+#### Pré-tri dans la Pile B :
 
-- Une fois triés dans B, les sous-groupes sont réintégrés dans la pile A en respectant l'ordre croissant.
+- Les éléments transférés dans B ne sont pas complètement triés, mais leur ordre est partiellement organisé en fonction des opérations effectuées lors du transfert.
+
+  #### Tri Final et Remise en Place :
+  - Lors du retour des éléments dans A, le tri final est effectué en comparant les index des éléments.
+  - Les éléments sont réintégrés dans A en respectant l'ordre croissant grâce à des rotations ou des ajustements dans B avant chaque push.
 
 ## Checker
 
