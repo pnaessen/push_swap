@@ -26,9 +26,10 @@ L'algorithme coréen est une méthode efficace pour trier une pile en plusieurs 
 
 - Les éléments transférés dans B ne sont pas complètement triés, mais leur ordre est partiellement organisé en fonction des opérations effectuées lors du transfert.
 
-  #### Tri Final et Remise en Place :
-  - Lors du retour des éléments dans A, le tri final est effectué en comparant les index des éléments.
-  - Les éléments sont réintégrés dans A en respectant l'ordre croissant grâce à des rotations ou des ajustements dans B avant chaque push.
+#### Tri Final et Remise en Place :
+
+- Lors du retour des éléments dans A, le tri final est effectué en comparant les index des éléments.
+- Les éléments sont réintégrés dans A en respectant l'ordre croissant grâce à des rotations ou des ajustements dans B avant chaque push.
 
 ## Checker
 
